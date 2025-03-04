@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <title>Update Expense</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" th:href="@{/assets/favicon.ico}"/>
+    
+    <!-- Font Awesome & Google Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet"/>
+    
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    
+    <style>
+        body {
+            background: url('/assets/img/invest.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Navbar Styling */
+        .navbar-custom {
+            background-color: #000 !important;
+        }
+        .navbar-custom .navbar-brand, 
+        .navbar-custom .nav-link {
+            color: #ffcc00 !important;
+        }
+        .navbar-custom .nav-link:hover {
+            color: #ffdb4d !important;
+        }
+
+        /* Form Styling */
+        .expense-container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(8px);
+            max-width: 70%;
+            margin: auto;
+        }
+        .form-control {
+            background: transparent;
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .form-control::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+        .form-control:focus {
+            background: transparent;
+            color: #fff;
+            border-color: #ffcc00;
+            box-shadow: none;
+        }
+        .btn-success {
+            background: #ffcc00;
+            border: none;
+            color: #000;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .btn-success:hover {
+            background: #ffdb4d;
+        }
+
+        /* Ensure navbar visibility */
+        .navbar-space {
+            margin-top: 100px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navigation -->
+<div th:replace="fragments/navbar :: navbar('no', 'no', 'no', 'yes', 'yes', 'yes')"></div>
+
+<!-- Update Expense Form Below Navbar -->
+<div class="navbar-space"></div>
+
+
+<div class="container">
+    <div class="expense-container">
+        <h3 class="text-center mb-4">Update Expense</h3>
+
+        <form th:action="@{/submitUpdate}" th:object="${expense}" method="post">
+            <input type="hidden" name="expenseId" th:value="${expenseId}"/>
+
+            <div class="form-group">
+                <label for="expenseCategory"><h6>Expense Category:</h6></label>
+                <select id="expenseCategory" class="form-control" th:field="*{category}">
+                    <option th:each="cat : ${categories}" th:value="${cat.id}" th:text="${cat.name}"></option>
+                </select>
+            </div>
+
+            <br>
+            <div class="form-group">
+                <label for="amount"><h6>Amount</h6></label>
+                <input type="number" class="form-control" id="amount" th:field="*{amount}" required>
+            </div>
+
+            <br>
+            <div class="form-group">
+                <label for="dateTime"><h6>Date & Time</h6></label>
+                <input type="datetime-local" class="form-control" id="dateTime" th:field="*{dateTime}" required>
+            </div>
+
+            <br>
+            <div class="form-group">
+                <label for="description"><h6>Description</h6></label>
+                <textarea class="form-control" id="description" th:field="*{description}" rows="3"></textarea>
+            </div>
+
+            <br>
+            <input type="submit" class="btn btn-success w-50 mx-auto d-block" value="Update"/>
+        </form>
+    </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
