@@ -43,6 +43,8 @@ Open your web browser and navigate to `http://localhost:8080`.
 
 ## ScreenShots
 ![Example Image](screenshots/1.png) <br>
+![Example Image](screenshots/1-2.png) <br>
+![Example Image](screenshots/1-3.png) <br>
 ![Example Image](screenshots/2-2.png) <br>
 ![Example Image](screenshots/3-3.png) <br>
 ![Example Image](screenshots/4-4.png) <br>
